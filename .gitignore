@@ -1,1 +1,3 @@
-config.h
+dwm
+dwm.1
+*.o
