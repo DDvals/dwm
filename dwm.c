@@ -465,7 +465,8 @@ buttonpress(XEvent *e)
 				    else
 					statussig = ch;
 				}
-		}else
+			}
+		} else
 			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
