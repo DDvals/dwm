@@ -171,7 +171,7 @@ static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
-static pid_t getstatusbarpid();
+static pid_t getstatusbarpid(void);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -446,26 +446,26 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext) + lrpad - 2) {
+		else if (ev->x > selmon->ww - statusw) {
+			x = selmon->ww - statusw;
 			click = ClkStatusText;
 			statussig = 0;
 			for (text = s = stext; *s && x <= ev->x; s++) {
 				if ((unsigned char)(*s) < ' ') {
-					ch = *s;
-					*s = '\0';
-					x += TEXTW(text) - lrpad;
-					*s = ch;
-					text = s + 1;
-					if (x >= ev->x)
-						break;
-					/* reset on matching signal raw byte */
-					if (ch == statussig)
-						statussig = 0;
-					else
-						statussig = ch;
+				    ch = *s;
+				    *s = '\0';
+				    x += TEXTW(text) - lrpad;
+				    *s = ch;
+				    text = s + 1;
+				    if (x >= ev->x)
+					break;
+				    /* End clickable section on a matching signal raw byte */
+				    if (statussig == ch)
+					statussig = 0;
+				    else
+					statussig = ch;
 				}
-			}
-		} else
+		}else
 			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
@@ -916,7 +916,7 @@ getatomprop(Client *c, Atom prop)
 }
 
 pid_t
-getstatusbarpid()
+getstatusbarpid(void)
 {
 	char buf[32], *str = buf, *c;
 	FILE *fp;

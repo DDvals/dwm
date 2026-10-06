@@ -12,7 +12,6 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
-
 /* Custom colors */
 static const char col_bg[]       = "#080b10";
 static const char col_fg[]       = "#c5d1eb";
@@ -119,6 +118,12 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
+	{ ClkStatusText,        0,              6,              sigstatusbar,   {.i = 6} },
+	{ ClkStatusText,        0,              7,              sigstatusbar,   {.i = 7} },
+	{ ClkStatusText,        0,              8,              sigstatusbar,   {.i = 8} },
+	{ ClkStatusText,        0,              9,              sigstatusbar,   {.i = 9} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
@@ -127,3 +132,4 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
